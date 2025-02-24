@@ -1,11 +1,46 @@
-% Script de teste MATLAB para LCA Navigator +
+% Script de teste MATLAB para LCA Navigator+ com CVX e Gurobi
+
+% Iniciar mensagem
+disp('A iniciar teste com CVX e Gurobi...');
+
+% Configurar o CVX com Gurobi
+cvx_setup;  % Certifica-se que o CVX está configurado
+cvx_grbgetkey 39f5f2bc-9979-45cd-8a7c-91a9da080f91 % Obtem dinamicamente a license
+cvx_solver gurobi;
+
+% Verificar o solver atual
+solver = cvx_solver;
+disp(['Solver atual do CVX: ', solver]);
+
+% Exemplo simples de otimização convexa
+% Problema: Minimizar ||Ax - b||^2 sujeito a x >= 0
 
 % Gerar dados de teste
-x = linspace(0, 10, 100);
-y = sin(x);
+A = randn(10, 5);
+b = randn(10, 1);
+
+% Resolver o problema com CVX
+disp('A iniciar a otimização...');
+cvx_begin
+    variable x(5)
+    minimize( norm(A * x - b) )
+    subject to
+        x >= 0
+cvx_end
+
+% Exibir resultados
+disp('Otimização concluída.');
+disp(['Status do CVX: ', cvx_status]);
+disp('Solução ótima encontrada:');
+disp(x);
 
 % Guardar resultados em arquivo .mat
-filename = 'resultados_teste.mat';
-save(filename, 'x', 'y');
+filename = 'resultados_teste_cvx.mat';
+save(filename, 'A', 'b', 'x', 'cvx_status');
 
-disp(['Resultados guardados em: ', filename]);
+% Verificar sucesso da execução
+if strcmp(cvx_status, 'Solved')
+    disp('Teste concluído do CVX e Gurobi com sucesso.');
+else
+    disp('Houve um problema na execução do CVX com Gurobi.');
+end
