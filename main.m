@@ -1,26 +1,32 @@
-% Script de teste MATLAB para LCA Navigator+ com CVX e Gurobi
+% Start message
+disp('Starting test with CVX and Gurobi...');
 
-% Iniciar mensagem
-disp('A iniciar teste com CVX e Gurobi...');
+% Ensure the CVX path is added
+cvx_path = fullfile(pwd, 'cvx');
+if exist(cvx_path, 'dir')
+    addpath(cvx_path);
+end
 
-% Configurar o CVX com Gurobi
-cvx_setup;  % Certifica-se que o CVX está configurado
-cvx_grbgetkey 39f5f2bc-9979-45cd-8a7c-91a9da080f91 % Obtem dinamicamente a license
+cvx_startup
+
+% Configure Gurobi
+%setenv('GRB_LICENSE_FILE', '/veracruz/home/m/marcosilva/matlabLCA/cvx/gurobi/a64/gurobi.lic');
+%grbgetkey c850ed58-2d16-4581-8ba7-2ec3ccefb705
+%export GRB_LICENSE_FILE=/veracruz/home/m/marcosilva/matlabLCA/cvx/gurobi/a64/gurobi.lic
+
+setenv('GRB_LICENSE_FILE', '/veracruz/home/m/marcosilva/matlabLCA/cvx/gurobi/a64/gurobi.lic');
+disp(['GRB_LICENSE_FILE set to: ', getenv('GRB_LICENSE_FILE')]);
+
+% Set the solver
 cvx_solver gurobi;
 
-% Verificar o solver atual
-solver = cvx_solver;
-disp(['Solver atual do CVX: ', solver]);
-
-% Exemplo simples de otimização convexa
-% Problema: Minimizar ||Ax - b||^2 sujeito a x >= 0
-
-% Gerar dados de teste
+% Generate test data
 A = randn(10, 5);
 b = randn(10, 1);
 
-% Resolver o problema com CVX
-disp('A iniciar a otimização...');
+% Solve the problem with CVX
+disp('Starting optimization...');
+
 cvx_begin
     variable x(5)
     minimize( norm(A * x - b) )
@@ -28,19 +34,20 @@ cvx_begin
         x >= 0
 cvx_end
 
-% Exibir resultados
-disp('Otimização concluída.');
-disp(['Status do CVX: ', cvx_status]);
-disp('Solução ótima encontrada:');
+% Display results
+disp('Optimization completed.');
+disp(['CVX status: ', cvx_status]);
+disp('Optimal solution found:');
 disp(x);
 
-% Guardar resultados em arquivo .mat
-filename = 'resultados_teste_cvx.mat';
+% Save results to a .mat file
+filename = 'cvx_test_results.mat';
 save(filename, 'A', 'b', 'x', 'cvx_status');
 
-% Verificar sucesso da execução
+% Verify execution success
 if strcmp(cvx_status, 'Solved')
-    disp('Teste concluído do CVX e Gurobi com sucesso.');
+    disp('CVX and Gurobi test successfully completed.');
 else
-    disp('Houve um problema na execução do CVX com Gurobi.');
+    disp('There was a problem executing CVX with Gurobi.');
 end
+

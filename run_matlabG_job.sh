@@ -14,5 +14,5 @@
 module load MATLAB/2023b
 
 # Executar o script MATLAB sem interface gráfica
-matlab -nodisplay -nosplash -r "run('main.m'); exit;"
+matlab -nodisplay -nosplash -r "run('test.m'); exit;"
 
