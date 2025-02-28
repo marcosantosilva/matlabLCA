@@ -11,7 +11,9 @@ else
 end
 
 % Definir variável de ambiente com o caminho da licença
- setenv('GRB_LICENSE_FILE', '/veracruz/home/m/marcosilva/matlabLCA/cvx/gurobi/a64/gurobi.lic');
+ %setenv('GRB_LICENSE_FILE', 'cvx/gurobi/a64/gurobi.lic');
+gurobi_license_path = fullfile(pwd, 'cvx', 'gurobi', 'a64', 'gurobi.lic');
+setenv('GRB_LICENSE_FILE', gurobi_license_path);
 
 % Verificar se a licença está corretamente definida
  disp(['✔ GRB_LICENSE_FILE set to: ', getenv('GRB_LICENSE_FILE')]);
@@ -34,11 +36,11 @@ end
 
 % 3. Check available solvers in CVX
 try
-    solvers = cvx_solver;
+    solvers = evalc('cvx_solver');
     disp('✔ Available CVX solvers:');
     disp(solvers);
 
-    if any(strcmp(solvers, 'gurobi'))
+    if any(strcmp(solvers, 'Gurobi'))
         disp('✔ Gurobi solver is available in CVX.');
     else
         error('✘ ERROR: Gurobi is NOT in the list of CVX solvers. Check CVX installation.');
