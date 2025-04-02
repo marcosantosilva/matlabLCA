@@ -35,18 +35,18 @@ do
         
         # Check if the file already exists in resT/
         if [ -f "$file_resT" ]; then
-            echo "The file $file_resT already exists in resT/. Moving to the next se value."
+            echo "##The file $file_resT already exists in resT/. Moving to the next se value."
             continue  # Move to the next se value
         fi
 
         # Check if the file already exists in temp/
         if [ -f "$file_temp" ]; then
-            echo "The file $file_temp already exists in temp/. Moving to the next se value."
+            echo "##The file $file_temp already exists in temp/. Moving to the next se value."
             continue  # Move to the next se value
         fi
 
         # If the file does not exist in either directory, run the simulation
-        echo "Running simulation for sd=${sd} and se=${se_formatted}..."
+        echo "##Running simulation for sd=${sd} and se=${se_formatted}..."
         
         # Run the MATLAB script without the graphical interface
         matlab -nodisplay -nosplash -r "genFig3($sd, $se); exit;"

@@ -1,0 +1,7 @@
+{Error using test
+✘ ERROR: Failed to check CVX solvers. Details: ✘ ERROR: Gurobi is NOT in the
+list of CVX solvers. Check CVX installation.
+
+Error in run (line 99)
+evalin('caller', strcat(script, ';'));
+} 

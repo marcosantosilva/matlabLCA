@@ -2,6 +2,7 @@ function genFig3(sd,se)
 addpath('/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64/matlab')
 addpath("cvx/");
 setenv('GRB_LICENSE_FILE','/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64/licenses/gurobi.lic')
+cvx_setup
 
     %for seedd = [ 1:5 25:29 41:45 51:55 91:95 101:105 ]
     
