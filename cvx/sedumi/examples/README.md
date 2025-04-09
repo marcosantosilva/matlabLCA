@@ -11,7 +11,7 @@ http://plato.asu.edu/sub/testcases.html.
   > Applied Mechanics and Engineering 94(1992):113-129.
   > DOI: [10.1016/0045-7825(92)90159-H](https://doi.org/10.1016/0045-7825(92)90159-H).
 
-  Optimal value is `5.66517e-01`.
+  Optimal value is `-5.66517e-01`.
 
 
 - **control07.mat**: Again from SDPLIB, a problem from control and system theory
@@ -22,7 +22,7 @@ http://plato.asu.edu/sub/testcases.html.
   > Department of Mathematical and Computing Sciences, Tokyo Institute of
   > Technology, September, 1997.
 
-  Optimal value is `2.06251e+01`.
+  Optimal value is `-2.06251e+01`.
 
 
 - **nb.mat**:  This problem is by Robert Vanderbei, it was used at the
@@ -40,7 +40,11 @@ http://plato.asu.edu/sub/testcases.html.
   > and the role of three-index representability", October, 2003.
   > DOI: [10.1063/1.1636721](https://doi.org/10.1063/1.1636721).
 
-  at http://mf.c.titech.ac.jp/mituhiro/software.html.
+  and http://mf.c.titech.ac.jp/mituhiro/software.html.  The reported energy is
+  `-75.1014` subtracted by the repulsion energy `4.3656986614` and negated
+  due to the problem formulation.
+
+  Optimal value is `7.946708e+01`.
 
 
 - **trto3.mat**: A problem by Kocvara, from single-load truss topology design.
@@ -54,3 +58,13 @@ http://plato.asu.edu/sub/testcases.html.
   > M. Kocvara and J. Zowe. How mathematics can help in design of mechanical
   > structures. In D.F. Griffiths and G.A. Watson, eds., Numerical Analysis
   > 1995, Longman, Harlow, 1996, pp. 76--93.
+  
+
+- **quantum.mat**: A traditional problem from quantum information theory,
+  it computes the probability of succesfully distinguishing two quantum states.
+  It's used to test SeDuMi's support for complex numbers.
+  For details see
+
+  > [Quantum state discrimination](https://en.wikipedia.org/wiki/Quantum_state_discrimination)
+
+  Optimal value is `-0.75395345`

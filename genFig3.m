@@ -1,8 +1,13 @@
 function genFig3(sd,se)
-addpath('/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64/matlab')
-addpath("cvx/");
-setenv('GRB_LICENSE_FILE','/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64/licenses/gurobi.lic')
+addpath('/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64/matlab');
+setenv('GRB_LICENSE_FILE', '/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64/licenses/gurobi.lic');
+setenv('GUROBI_HOME', '/veracruz/home/m/marcosilva/matlabLCA/gurobi1201/linux64');
+
+% 2. Configure CVX
+addpath('cvx/');
 cvx_setup
+
+
 
     %for seedd = [ 1:5 25:29 41:45 51:55 91:95 101:105 ]
     
@@ -327,7 +332,7 @@ cvx_setup
             end
     
             cvx_end
-    
+ 	    disp('====cvx end====');   
             % Calculate the total power consumption for the current setup
             % (24a)
             TotalPower(1,sss) = Pdisp + PPl*sum(zz) + DeltaTr*quad_form(rho,eye(K*L))/10 ...

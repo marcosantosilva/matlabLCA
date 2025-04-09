@@ -53,7 +53,7 @@ mwIndex blkLDL(const mwIndex neqns, const mwIndex nsuper, const mwIndex *xsuper,
 void isscalarmul(double *x, double alpha, mwIndex n)
 {
     blasint one=1,nn=n;
-    FORT(dscal)(&n,&alpha,x,&one);
+    FORT(dscal)(&nn,&alpha,x,&one);
 }
 
 /* ************************************************************
@@ -113,16 +113,21 @@ void cholonBlk(double *x, double *d, mwIndex m, const mwIndex ncols, const mwInd
    ------------------------------------------------------- */
     xkk = x[inz];
     if(xkk > lb[k]){ /* now xkk > 0 */
-      if(xkk < ub){
+/* ------------------------------------------------------------
+   maxabs is a wrapper for the BLAS IDAMAX Fortran function.
+   IDAMAX finds the first element having maximum absolute
+   value in an array. Only call maxabs with m>1. 
+   ------------------------------------------------------------ */
+      if ((m>1) && (xkk < ub)){
         ubk = maxabs(x+inz+1,m-1) / maxu;
         if(xkk < ubk){
 /* ------------------------------------------------------------
    If we need to add on diagonal, store this in (skipIr, lb(k)).
    ------------------------------------------------------------ */
           skipIr[nskip++] = first + k;
-	  lb[k] = ubk - xkk;           /* amount added on diagonal */
-	  xkk = ubk;
-	}
+          lb[k] = ubk - xkk;           /* amount added on diagonal */
+          xkk = ubk;
+        }
       }
 /* --------------------------------------------------------------
    Set dk = xkk, lkk = 1 (for LDL').

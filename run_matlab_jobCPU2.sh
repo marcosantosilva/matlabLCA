@@ -5,7 +5,7 @@
 #SBATCH --error=matlab_error.log       # Error file
 #SBATCH --ntasks=1                     # Number of tasks
 #SBATCH --cpus-per-task=48             # Number of CPUs per task
-#SBATCH --mem=4G                       # Total memory
+#SBATCH --mem=64G                       # Total memory
 #SBATCH --time=48:00:00                # Max time (hh:mm:ss) set to 48 hours
 #SBATCH --partition=cpu2               # Desired partition
 #SBATCH --account=cfmmimo              # Project account (mandatory)

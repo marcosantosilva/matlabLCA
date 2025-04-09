@@ -39,6 +39,7 @@
 */
 
 #include "mex.h"
+#include "symfct.h"
 
 #define L_OUT plhs[0]
 #define NPAROUT 1
@@ -86,7 +87,7 @@ void getadj(mwIndex *forjc,mwIndex *forir,const mwIndex *cjc,const mwIndex *cir,
 /* ------------------------------------------------------------
    EXPANDSUB -
    ------------------------------------------------------------ */
-void expandsub( mwSize n, mwSize nsuper, 
+void expandsub( mwSize n, mwSize nsuper,
                 const mwIndex* xsuper, const mwIndex* xlindx,
                 mwIndex *Ljc, mwIndex *Lir )
 {
@@ -135,7 +136,6 @@ void mexFunction(const int nlhs, mxArray *plhs[],
     *invp, *colcnt;
   mxArray *L_FIELD;
   const char *LFieldnames[] = {"L", "perm", "xsuper"};
-  mwIndex *mwXjc, *mwXir, *mwLjc, *mwLir;
 /* ------------------------------------------------------------
    Check for proper number of arguments
    ------------------------------------------------------------ */
